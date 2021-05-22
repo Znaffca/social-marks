@@ -2,7 +2,20 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
-from .forms import LoginForm
+from .forms import LoginForm, RegistrationForm
+
+
+def register(request):
+    if request.method == "POST":
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            new_user =  form.save(commit=False)
+            new_user.set_password(form.cleaned_data["password"])
+            new_user.save()
+            return render(request, "account/register_done.html")
+    else:
+        form = RegistrationForm()
+        return render(request, "account/register.html", {"form": form})
 
 
 def user_login(request):
@@ -29,3 +42,5 @@ def user_login(request):
 @login_required
 def dashboard(request):
     return render(request, "account/dashboard.html", {"section": "dashboard"})
+
+
