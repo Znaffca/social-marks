@@ -170,6 +170,6 @@ EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
 
 # handling media settings
 
-MEDIA_URL = '/media/'
+MEDIA_URL = "/media/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
