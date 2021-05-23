@@ -11,6 +11,8 @@ fi
 
 # flush the previous db tables
 python manage.py flush --no-input
+# make newm migrations
+python manage.py makemigrations
 # apply new migrations
 python manage.py migrate
 # create a superuser to manage the new posts

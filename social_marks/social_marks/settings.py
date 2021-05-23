@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "account.apps.AccountConfig",
     "django.contrib.admin",
+    "django_extensions",
+    "social_django",
 ]
 
 MIDDLEWARE = [
@@ -112,6 +114,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Handling custome authentication view (email login)
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "account.authentication.EmailAuthBackend",
+]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -157,3 +166,10 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = os.getenv("EMAIL_PORT")
 
 EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
+
+
+# handling media settings
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
